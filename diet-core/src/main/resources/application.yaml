@@ -1,0 +1,65 @@
+# spring
+spring:
+  profiles:
+    active:
+      captcha,
+      upload,
+      prod
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/java
+  main:
+    allow-bean-definition-overriding: true
+  mvc:
+    static-path-pattern: /static/**
+    throw-exception-if-no-handler-found: true
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/diet?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: noah_1324
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+      aop-patterns: org.app.diet.service.*,org.app.diet.repository.*
+      web-stat-filter:
+        url-pattern: /*
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+      stat-view-servlet:
+        url-pattern: /druid/*
+        login-username: druid
+        login-password: 123456
+        enabled: true
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  servlet:
+    multipart:
+      max-file-size: 10MB
+
+# swagger
+swagger:
+  enabled: true
+  title: "api document"
+  version: 1.0
+  package-name: org.app.diet.api
+
+# log
+log:
+  enabled: true
+
+# token
+token:
+  secret: KMeUsE0bX+5r4ob5DvVSr8buSFcSDHHDwyt3cTDnpnZlyo51BsydcAf8iegk9yJwhyuiEF/gQ4QuQ1Q18WU5cA==
+  # 7 days
+  expired-time: 604800
+  login-url: "/login"
+  logout-url: "/logout"
+  login-user-name-parameter: "username"
+  login-password-parameter: "password"
+
+# redis
+redis:
+  # 3 minutes
+  expired-time: 180

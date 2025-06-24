@@ -1,0 +1,10 @@
+# server
+server:
+  port: 8055
+
+# token
+token:
+  login-url: "/users/login"
+  ignore-paths:
+    /test/**,
+    /users/register
