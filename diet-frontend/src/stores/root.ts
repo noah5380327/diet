@@ -15,11 +15,10 @@ export const useRootStore = defineStore('root', {
     tokenValue: (state) => {
       return state.token ? state.token : LocalStorage.getItem('token') || '';
     },
-    isStudent: (state) => {
-      return state.role ? state.role === 'STUDENT' : true;
-    },
     isCoach: (state) => {
-      return state.role ? state.role === 'COACH' : false;
+      return state.role
+        ? state.role === 'COACH'
+        : LocalStorage.getItem('role') === 'COACH';
     },
   },
   actions: {

@@ -47,7 +47,15 @@ const routes: RouteRecordRaw[] = [
         name: 'recipeResult',
         component: () => import('pages/RecipeResultPage.vue'),
         meta: {
-          title: 'recipeResult',
+          title: 'RecipeResult',
+        },
+      },
+      {
+        path: 'coachRequest',
+        name: 'coachRequest',
+        component: () => import('pages/CoachRequestPage.vue'),
+        meta: {
+          title: 'CoachRequest',
         },
       },
     ],

@@ -3,6 +3,7 @@ package org.app.diet.api;
 import jakarta.validation.constraints.NotBlank;
 import org.app.diet.annotation.CoreApi;
 import org.app.diet.dto.ApiDto;
+import org.app.diet.dto.CoachStudentDto;
 import org.app.diet.entity.CoachStudentEntity;
 import org.app.diet.service.CoachStudentService;
 import org.app.diet.util.ApiUtil;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CoreApi
 public class CoachStudentApi {
@@ -40,9 +43,24 @@ public class CoachStudentApi {
         return ApiUtil.success();
     }
 
-    @PutMapping("/coachStudents/{id}/status/{status}")
-    public ApiDto updateById(@NotBlank @PathVariable("id") String id, @NotBlank @PathVariable("status") String status) {
-        coachStudentService.updateStatusById(id, status);
+    @GetMapping("/coachStudents/status/pending")
+    @PreAuthorize("hasRole('COACH')")
+    public ApiDto getAllPendingCoachStudents() {
+        List<CoachStudentDto> coachStudentEntityList = coachStudentService.getAllPendingCoachStudents();
+        return ApiUtil.success(coachStudentEntityList);
+    }
+
+    @PutMapping("/coachStudents/{id}/status/accepted")
+    @PreAuthorize("hasRole('COACH')")
+    public ApiDto updateStatusAcceptedById(@NotBlank @PathVariable("id") String id) {
+        coachStudentService.updateStatusById(id, "ACCEPTED");
+        return ApiUtil.success();
+    }
+
+    @PutMapping("/coachStudents/{id}/status/rejected")
+    @PreAuthorize("hasRole('COACH')")
+    public ApiDto updateStatusRejectedById(@NotBlank @PathVariable("id") String id) {
+        coachStudentService.updateStatusById(id, "REJECTED");
         return ApiUtil.success();
     }
 }

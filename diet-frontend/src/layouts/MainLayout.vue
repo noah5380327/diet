@@ -66,6 +66,7 @@
 import { ref, computed, onMounted } from 'vue';
 import { useQuasar } from 'quasar';
 import { useRouter } from 'vue-router';
+import { storeToRefs } from 'pinia';
 import { useRootStore } from 'stores/root';
 import { getCurrentUser } from 'src/server/apis/user';
 import { User } from 'src/server/interfaces/user';
@@ -83,6 +84,7 @@ defineOptions({
 const $q = useQuasar();
 const router = useRouter();
 const store = useRootStore();
+const { isCoach } = storeToRefs(store);
 const { setToken } = store;
 
 const leftDrawerOpen = ref(true);
@@ -92,7 +94,7 @@ const username = computed(() =>
   currentUser.value ? currentUser.value?.username : 'Quasar'
 );
 const menus = computed<EssentialLinkProps[]>(() => {
-  return [
+  let values: EssentialLinkProps[] = [
     {
       title: 'Home',
       icon: 'home',
@@ -119,6 +121,23 @@ const menus = computed<EssentialLinkProps[]>(() => {
       link: 'recipeResult',
     },
   ];
+
+  if (isCoach.value) {
+    values = [
+      {
+        title: 'Home',
+        icon: 'home',
+        link: 'dashboard',
+      },
+      {
+        title: 'Binding Request',
+        icon: 'inbox',
+        link: 'coachRequest',
+      },
+    ];
+  }
+
+  return values;
 });
 
 function toggleLeftDrawer() {

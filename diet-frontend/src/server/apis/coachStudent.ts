@@ -3,6 +3,7 @@ import {
   CoachStudent,
   CoachStudentCreatePayload,
   CoachStudentUpdatePayload,
+  CoachStudentWithDetail,
 } from 'src/server/interfaces/coachStudent';
 
 export function getCurrentCoachStudent(): Promise<CoachStudent> {
@@ -32,12 +33,24 @@ export function updateCoachStudentById(
   });
 }
 
-export function updateCoachStudentStatusById(
-  id: string,
-  status: string
-): Promise<void> {
+export function getAllPendingCoachStudents(): Promise<
+  CoachStudentWithDetail[]
+> {
+  return axios({
+    url: '/coachStudents/status/pending',
+  });
+}
+
+export function acceptCoachStudentById(id: string): Promise<void> {
   return axios({
     method: 'put',
-    url: `/coachStudents/${id}/status/${status}`,
+    url: `/coachStudents/${id}/status/accepted`,
+  });
+}
+
+export function rejectCoachStudentById(id: string): Promise<void> {
+  return axios({
+    method: 'put',
+    url: `/coachStudents/${id}/status/rejected`,
   });
 }

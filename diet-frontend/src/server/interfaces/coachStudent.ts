@@ -1,3 +1,5 @@
+import { User } from 'src/server/interfaces/user';
+
 export interface CoachStudent {
   id: string;
   studentId: string;
@@ -5,6 +7,10 @@ export interface CoachStudent {
   status: string;
   createdTime: string;
   updatedTime: string;
+}
+
+export interface CoachStudentWithDetail extends CoachStudent {
+  student: User;
 }
 
 export interface CoachStudentCreatePayload {
