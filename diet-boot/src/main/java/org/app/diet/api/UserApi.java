@@ -7,6 +7,7 @@ import org.app.diet.service.UserService;
 import org.app.diet.util.ApiUtil;
 import org.app.diet.vo.UserRegisterVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,6 +34,7 @@ public class UserApi {
     }
 
     @GetMapping("/users/coaches")
+    @PreAuthorize("hasRole('STUDENT')")
     public ApiDto getAllCoaches() {
         List<UserEntity> coaches = userService.getAllCoaches();
         return ApiUtil.success(coaches);

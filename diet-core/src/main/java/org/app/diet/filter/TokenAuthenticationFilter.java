@@ -72,7 +72,7 @@ public class TokenAuthenticationFilter extends BasicAuthenticationFilter {
 
         if (ObjectUtil.isNotNull(roles)) {
             for (String role : roles) {
-                authorities.add(new SimpleGrantedAuthority(role));
+                authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
             }
         }
 

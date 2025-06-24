@@ -25,7 +25,6 @@ public class AuthenticationFailHandler extends SimpleUrlAuthenticationFailureHan
 
         if (exception instanceof LockedException) {
             ResponseUtil.lockedException(exception, response);
-            return;
         }
     }
 }

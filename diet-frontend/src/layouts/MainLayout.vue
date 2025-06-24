@@ -85,7 +85,7 @@ const router = useRouter();
 const store = useRootStore();
 const { setToken } = store;
 
-const leftDrawerOpen = ref(false);
+const leftDrawerOpen = ref(true);
 const currentUser = ref<User>();
 
 const username = computed(() =>

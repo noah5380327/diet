@@ -6,5 +6,4 @@ server:
 token:
   login-url: "/users/login"
   ignore-paths:
-    /test/**,
     /users/register
