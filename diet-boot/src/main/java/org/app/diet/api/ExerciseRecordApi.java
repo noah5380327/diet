@@ -6,6 +6,7 @@ import org.app.diet.dto.ApiDto;
 import org.app.diet.entity.ExerciseRecordEntity;
 import org.app.diet.service.ExerciseRecordService;
 import org.app.diet.util.ApiUtil;
+import org.app.diet.vo.ExerciseRecordCreateForStudentVo;
 import org.app.diet.vo.ExerciseRecordCreateVo;
 import org.app.diet.vo.ExerciseRecordUpdateVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,13 +36,6 @@ public class ExerciseRecordApi {
         return ApiUtil.success(list);
     }
 
-    @GetMapping("/exerciseRecords/{id}")
-    @PreAuthorize("hasRole('STUDENT')")
-    public ApiDto findById(@NotBlank @PathVariable("id") String id) {
-        ExerciseRecordEntity exerciseRecordEntity = exerciseRecordService.findById(id);
-        return ApiUtil.success(exerciseRecordEntity);
-    }
-
     @PutMapping("/exerciseRecords/{id}")
     @PreAuthorize("hasRole('STUDENT')")
     public ApiDto updateById(@NotBlank @PathVariable("id") String id, @Validated @RequestBody ExerciseRecordUpdateVo vo) {
@@ -53,6 +47,13 @@ public class ExerciseRecordApi {
     @PreAuthorize("hasRole('STUDENT')")
     public ApiDto deleteById(@NotBlank @PathVariable("id") String id) {
         exerciseRecordService.deleteById(id);
+        return ApiUtil.success();
+    }
+
+    @PostMapping("/exerciseRecords/forStudents")
+    @PreAuthorize("hasRole('COACH')")
+    public ApiDto create(@Validated @RequestBody ExerciseRecordCreateForStudentVo vo) {
+        exerciseRecordService.createForStudent(vo);
         return ApiUtil.success();
     }
 }

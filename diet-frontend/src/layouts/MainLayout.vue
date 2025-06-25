@@ -134,6 +134,11 @@ const menus = computed<EssentialLinkProps[]>(() => {
         icon: 'inbox',
         link: 'coachRequest',
       },
+      {
+        title: 'Student List',
+        icon: 'people',
+        link: 'coachStudent',
+      },
     ];
   }
 

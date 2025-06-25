@@ -5,6 +5,7 @@ import org.app.diet.entity.ExerciseRecordEntity;
 import org.app.diet.entity.RecipeEntity;
 import org.app.diet.entity.StudentProfileEntity;
 import org.app.diet.exception.CoreException;
+import org.app.diet.repository.CoachStudentRepository;
 import org.app.diet.repository.ExerciseRecordRepository;
 import org.app.diet.repository.RecipeRepository;
 import org.app.diet.repository.StudentProfileRepository;
@@ -26,6 +27,9 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Autowired
     private ExerciseRecordRepository exerciseRecordRepository;
+
+    @Autowired
+    private CoachStudentRepository coachStudentRepository;
 
     @Override
     public RecipeEntity generateRecipe() {
@@ -77,5 +81,17 @@ public class RecipeServiceImpl implements RecipeService {
     public RecipeEntity getLatestRecipe() {
         String userId = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return recipeRepository.findTopByUserIdOrderByCreatedTimeDesc(userId);
+    }
+
+    @Override
+    public RecipeEntity getRecipeByStudentId(String studentId) {
+        String coachId = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Boolean exist = coachStudentRepository.existsByStudentIdAndCoachIdAndStatus(studentId, coachId, "ACCEPTED");
+        if (!exist) {
+            throw new CoreException("You are not bound to this student.");
+        }
+
+        return recipeRepository.findTopByUserIdOrderByCreatedTimeDesc(studentId);
     }
 }

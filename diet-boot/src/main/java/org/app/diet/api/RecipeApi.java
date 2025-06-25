@@ -1,5 +1,6 @@
 package org.app.diet.api;
 
+import jakarta.validation.constraints.NotBlank;
 import org.app.diet.annotation.CoreApi;
 import org.app.diet.dto.ApiDto;
 import org.app.diet.entity.RecipeEntity;
@@ -26,6 +27,13 @@ public class RecipeApi {
     @PreAuthorize("hasRole('STUDENT')")
     public ApiDto getLatestRecipe() {
         RecipeEntity recipeEntity = recipeService.getLatestRecipe();
+        return ApiUtil.success(recipeEntity);
+    }
+
+    @GetMapping("/recipes/students/{studentId}")
+    @PreAuthorize("hasRole('COACH')")
+    public ApiDto getRecipeByStudentId(@NotBlank @PathVariable("studentId") String studentId) {
+        RecipeEntity recipeEntity = recipeService.getRecipeByStudentId(studentId);
         return ApiUtil.success(recipeEntity);
     }
 }

@@ -13,3 +13,9 @@ export function getLatestRecipe(): Promise<Recipe> {
     url: '/recipes/latest',
   });
 }
+
+export function getRecipeByStudentId(studentId: string): Promise<Recipe> {
+  return axios({
+    url: `/recipes/students/${studentId}`,
+  });
+}

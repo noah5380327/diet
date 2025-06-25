@@ -58,6 +58,14 @@ const routes: RouteRecordRaw[] = [
           title: 'CoachRequest',
         },
       },
+      {
+        path: 'coachStudent',
+        name: 'coachStudent',
+        component: () => import('pages/CoachStudentPage.vue'),
+        meta: {
+          title: 'CoachStudent',
+        },
+      },
     ],
   },
 

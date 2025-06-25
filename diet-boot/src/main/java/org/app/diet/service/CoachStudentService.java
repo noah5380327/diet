@@ -17,5 +17,7 @@ public interface CoachStudentService {
 
    List<CoachStudentDto> getAllPendingCoachStudents();
 
+   List<CoachStudentDto> getAllAcceptedCoachStudents();
+
    void updateStatusById(String id, String status);
 }

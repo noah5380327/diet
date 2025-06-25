@@ -41,6 +41,14 @@ export function getAllPendingCoachStudents(): Promise<
   });
 }
 
+export function getAllAcceptedCoachStudents(): Promise<
+  CoachStudentWithDetail[]
+> {
+  return axios({
+    url: '/coachStudents/status/accepted',
+  });
+}
+
 export function acceptCoachStudentById(id: string): Promise<void> {
   return axios({
     method: 'put',

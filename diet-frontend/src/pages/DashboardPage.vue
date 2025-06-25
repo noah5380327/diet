@@ -51,16 +51,16 @@ const cards = computed(() => {
     return [
       {
         title: 'Binding Request',
-        subtitle: 'Review and process student requests',
+        subtitle: 'Process student requests',
         icon: 'inbox',
         route: 'coachRequest',
       },
-      // {
-      //   title: '学生列表',
-      //   subtitle: '查看所有已绑定学生',
-      //   icon: 'people',
-      //   route: 'coachStudents'
-      // },
+      {
+        title: 'Student List',
+        subtitle: 'View all bound students',
+        icon: 'people',
+        route: 'coachStudent',
+      },
       // {
       //   title: '训练记录',
       //   subtitle: '为学生上传训练数据',

@@ -3,17 +3,12 @@ import {
   ExerciseRecord,
   ExerciseRecordCreatePayload,
   ExerciseRecordUpdatePayload,
+  ExerciseRecordCreateForStudentPayload,
 } from 'src/server/interfaces/exerciseRecord';
 
 export function getExerciseRecords(): Promise<ExerciseRecord[]> {
   return axios({
     url: '/exerciseRecords',
-  });
-}
-
-export function getExerciseRecordById(id: string): Promise<ExerciseRecord> {
-  return axios({
-    url: `/exerciseRecords/${id}`,
   });
 }
 
@@ -42,5 +37,15 @@ export function deleteExerciseRecordById(id: string): Promise<void> {
   return axios({
     method: 'delete',
     url: `/exerciseRecords/${id}`,
+  });
+}
+
+export function createExerciseRecordForStudent(
+  payload: ExerciseRecordCreateForStudentPayload
+): Promise<void> {
+  return axios({
+    method: 'post',
+    url: '/exerciseRecords/forStudents',
+    data: payload,
   });
 }

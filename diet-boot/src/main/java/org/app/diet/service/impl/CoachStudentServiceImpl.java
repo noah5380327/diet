@@ -65,6 +65,15 @@ public class CoachStudentServiceImpl implements CoachStudentService {
     }
 
     @Override
+    public List<CoachStudentDto> getAllAcceptedCoachStudents() {
+        String userId = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<CoachStudentEntity> coachStudentEntityList = coachStudentRepository.findByCoachIdAndStatus(userId, "ACCEPTED");
+        List<String> studentIdList = CoachStudentUtil.convertToStudentIdList(coachStudentEntityList);
+        List<UserEntity> studentList = userRepository.findAllByIdIn(studentIdList);
+        return CoachStudentUtil.convertToDtoList(coachStudentEntityList, studentList);
+    }
+
+    @Override
     public void updateStatusById(String id, String status) {
         CoachStudentEntity coachStudentEntity = coachStudentRepository.findById(id).get();
         coachStudentEntity.setStatus(status);

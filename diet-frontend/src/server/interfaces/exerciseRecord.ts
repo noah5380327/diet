@@ -16,3 +16,8 @@ export interface ExerciseRecordCreatePayload {
 
 export interface ExerciseRecordUpdatePayload
   extends ExerciseRecordCreatePayload {}
+
+export interface ExerciseRecordCreateForStudentPayload
+  extends ExerciseRecordCreatePayload {
+  studentId: string;
+}

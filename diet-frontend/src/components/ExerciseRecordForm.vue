@@ -52,6 +52,7 @@ import { computed, ref, watch } from 'vue';
 import { useQuasar } from 'quasar';
 import {
   createExerciseRecord,
+  createExerciseRecordForStudent,
   updateExerciseRecordById,
 } from 'src/server/apis/exerciseRecord';
 import { ExerciseRecord } from 'src/server/interfaces/exerciseRecord';
@@ -63,6 +64,8 @@ defineOptions({
 interface ExerciseRecordCreateFormProps {
   visible: boolean;
   info?: ExerciseRecord;
+  forStudent?: boolean;
+  studentId?: string;
 }
 
 interface ExerciseRecordCreateFormEmit {
@@ -110,6 +113,15 @@ function onSubmit() {
         name: name.value,
         duration: duration.value,
         calories: calories.value,
+      }).then(() => {
+        afterSubmit();
+      });
+    } else if (props.forStudent) {
+      createExerciseRecordForStudent({
+        name: name.value,
+        duration: duration.value,
+        calories: calories.value,
+        studentId: props.studentId || '',
       }).then(() => {
         afterSubmit();
       });

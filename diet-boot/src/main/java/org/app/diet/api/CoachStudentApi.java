@@ -50,6 +50,13 @@ public class CoachStudentApi {
         return ApiUtil.success(coachStudentEntityList);
     }
 
+    @GetMapping("/coachStudents/status/accepted")
+    @PreAuthorize("hasRole('COACH')")
+    public ApiDto getAllAcceptedCoachStudents() {
+        List<CoachStudentDto> coachStudentEntityList = coachStudentService.getAllAcceptedCoachStudents();
+        return ApiUtil.success(coachStudentEntityList);
+    }
+
     @PutMapping("/coachStudents/{id}/status/accepted")
     @PreAuthorize("hasRole('COACH')")
     public ApiDto updateStatusAcceptedById(@NotBlank @PathVariable("id") String id) {

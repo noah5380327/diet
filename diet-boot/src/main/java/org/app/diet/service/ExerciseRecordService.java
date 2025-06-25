@@ -1,6 +1,7 @@
 package org.app.diet.service;
 
 import org.app.diet.entity.ExerciseRecordEntity;
+import org.app.diet.vo.ExerciseRecordCreateForStudentVo;
 import org.app.diet.vo.ExerciseRecordCreateVo;
 import org.app.diet.vo.ExerciseRecordUpdateVo;
 
@@ -12,9 +13,9 @@ public interface ExerciseRecordService {
 
    void create(ExerciseRecordCreateVo vo);
 
-   ExerciseRecordEntity findById(String id);
-
    void updateById(String id, ExerciseRecordUpdateVo vo);
 
    void deleteById(String id);
+
+   void createForStudent(ExerciseRecordCreateForStudentVo vo);
 }

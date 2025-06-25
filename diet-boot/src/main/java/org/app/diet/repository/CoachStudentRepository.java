@@ -15,4 +15,6 @@ public interface CoachStudentRepository extends JpaRepository<CoachStudentEntity
     CoachStudentEntity findByStudentId(String studentId);
 
     List<CoachStudentEntity> findByCoachIdAndStatus(String coachId, String status);
+
+    Boolean existsByStudentIdAndCoachIdAndStatus(String studentId, String coachId, String status);
 }
