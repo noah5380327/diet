@@ -32,8 +32,7 @@ This is a web-based fitness and diet management platform that allows students to
 ```
 diet/
 │
-├── diet-boot/       # Spring Boot backend
-│   ├── src/
+├── diet-backend/       # Spring Boot backend
 │   └── pom.xml
 │
 ├── diet-frontend/   # Quasar frontend project
@@ -51,7 +50,7 @@ diet/
 
 ```bash
 mvn clean install
-cd diet-boot
+cd diet-backend/diet-backend-api
 mvn spring-boot:run
 ```
 

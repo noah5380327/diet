@@ -77,8 +77,7 @@
     </dependencyManagement>
 
     <modules>
-        <module>diet-core</module>
-        <module>diet-boot</module>
         <module>diet-frontend</module>
+        <module>diet-backend</module>
     </modules>
 </project>
