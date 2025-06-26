@@ -13,6 +13,7 @@ This is a web-based fitness and diet management platform that allows students to
 - Spring Data JPA (Hibernate)
 - RESTFul API design
 - MySQL database
+- Redis for caching and temporary data storage (e.g., login sessions, verification codes)
 - Maven for build and dependency management
 
 ### Frontend – Vue 3 + Quasar Framework
@@ -49,16 +50,14 @@ diet/
 ### ✅ Start Backend
 
 ```bash
-cd diet-core
 mvn clean install
 cd diet-boot
-mvn clean install
-nohup java -jar target/diet-boot-0.0.1.jar > app.log 2>&1 &
+mvn spring-boot:run
 ```
 
 By default, the backend runs on `http://localhost:8055`.
 
-> ⚠️ Make sure your database connection is configured in `application.yml` or `.properties`.
+> ⚠️ Make sure your database connection is configured in `application-prod.yml`.
 
 ---
 

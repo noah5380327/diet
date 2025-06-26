@@ -13,5 +13,13 @@ import org.springframework.validation.annotation.Validated;
 @Setter
 public class RedisProperty {
 
+    private String host;
+
+    private Integer port;
+
+    private String username;
+
+    private String password;
+
     private Long expiredTime;
 }

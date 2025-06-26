@@ -1,5 +1,6 @@
 package org.app.diet.config;
 
+import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,6 +16,8 @@ import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.cache.RedisCacheWriter;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
@@ -27,6 +30,21 @@ public class RedisConfig {
 
     @Autowired
     private RedisProperty redisProperty;
+
+    @Bean
+    public RedisConnectionFactory redisConnectionFactory() {
+        RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
+        config.setHostName(redisProperty.getHost());
+        config.setPort(redisProperty.getPort());
+        if (StrUtil.isNotBlank(redisProperty.getUsername())) {
+            config.setUsername(redisProperty.getUsername());
+        }
+        if (StrUtil.isNotBlank(redisProperty.getPassword())) {
+            config.setPassword(redisProperty.getPassword());
+        }
+
+        return new LettuceConnectionFactory(config);
+    }
 
     @Bean
     public KeyGenerator core() {

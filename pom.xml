@@ -79,7 +79,6 @@
     <modules>
         <module>diet-core</module>
         <module>diet-boot</module>
-        <module>diet-log</module>
         <module>diet-frontend</module>
     </modules>
 </project>

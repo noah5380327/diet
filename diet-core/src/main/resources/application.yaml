@@ -2,8 +2,6 @@
 spring:
   profiles:
     active:
-      captcha,
-      upload,
       prod
   devtools:
     restart:
@@ -61,5 +59,7 @@ token:
 
 # redis
 redis:
+  host: 127.0.0.1
+  port: 6379
   # 3 minutes
   expired-time: 180
